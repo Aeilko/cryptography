@@ -7,7 +7,7 @@ public class OFB {
 	private int n;
 	private boolean[] vector;
 	private final int key;
-	private int r;
+	private final int r;
 	
 	public OFB(int key, String IV, int r) {
 		this(key, Functions.StringToArray(IV), r);

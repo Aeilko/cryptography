@@ -4,8 +4,8 @@ import general.Functions;
 
 public class Solver {
 	
-	private static String cipher = "LWPO,KJPM_V?MN,WM,YQP!QM,ZQEQLTXWMVLZQG,WVKTVLJ?LWXQ,X-GI";
-	private static char padding = 'p';
+	private static final String cipher = "LWPO,KJPM_V?MN,WM,YQP!QM,ZQEQLTXWMVLZQG,WVKTVLJ?LWXQ,X-GI";
+	private static final char padding = 'p';
 	
 	public static void solve() {
 		System.out.println("Ciphertext:\t\t" + Solver.cipher);

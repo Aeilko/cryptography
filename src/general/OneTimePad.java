@@ -2,8 +2,8 @@ package general;
 
 public class OneTimePad {
 	
-	private boolean[] key;
-	private int keyLength;
+	private final boolean[] key;
+	private final int keyLength;
 	
 	// Constructor
 	public OneTimePad(boolean[] key) {
