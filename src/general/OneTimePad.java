@@ -12,7 +12,7 @@ public class OneTimePad {
 	}
 	
 	public OneTimePad(String key) {
-		this.key = StringToArray(key);
+		this.key = Functions.StringToArray(key);
 		this.keyLength = key.length();
 	}
 	
@@ -29,39 +29,6 @@ public class OneTimePad {
 	}
 	
 	public String encode(String input) {
-		return ArrayToString(encode(StringToArray(input)));
-	}
-	
-	/**
-	 * Converts the given string of bits to a boolean array
-	 * @param in The string of bits
-	 * @return boolean[] representation of the bit string.
-	 */
-	public static boolean[] StringToArray(String in) {
-		boolean[] result = new boolean[in.length()];
-		
-		char[] bits = in.toCharArray();
-		int i = 0;
-		for(char a: bits) {
-			result[i] = (a == '1');
-			i++;
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * Converts the given boolean[] to a bit string
-	 * @param in The boolean array to be converted
-	 * @return The string representation of the boolean[]
-	 */
-	public static String ArrayToString(boolean[] in) {
-		String result = "";
-		
-		for(boolean a: in) {
-			result += (a ? "1" : "0");
-		}
-		
-		return result;
+		return Functions.ArrayToString(encode(Functions.StringToArray(input)));
 	}
 }

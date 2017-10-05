@@ -1,36 +1,42 @@
-package ass56;
+package ass57;
 
 import general.Functions;
 
 public class Solver {
-	
-	private static String cipher = "LWPO,KJPM_V?MN,WM,YQP!QM,ZQEQLTXWMVLZQG,WVKTVLJ?LWXQ,X-GI";
-	private static char padding = 'p';
+
+	private static final String plainText = "honey";
+	private static final int key = 11;
+	private static final int shift = 3;
+	private static final String IV = "01001";
 	
 	public static void solve() {
-		System.out.println("Ciphertext:\t\t" + Solver.cipher);
+		System.out.println("Plaintext:\t\t" + Solver.plainText);
 		
-		// Get last char, which is the padding, and XOR it with the padding to get the key
-		int lastInt = charToInt(cipher.charAt(cipher.length()-1));
-		int padInt = charToInt(Solver.padding);
-		int keyInt = lastInt^padInt;
-		String key = Functions.intToBinaryString(keyInt);
-		
-		System.out.println("Key:\t\t\t" + key);
-		
-		// Get the OTP with the key and decrypt the message
-		OTPinECB otp = new OTPinECB(key);
-		String plaintext = "";
-		for(char a: cipher.substring(0, cipher.length()-1).toCharArray()) {
-			String binary = otp.encode(Functions.intToBinaryString(Solver.charToInt(a)));
-			int binaryInt = Functions.binaryStringToInt(binary);
-			char res = Solver.intToChar(binaryInt);
-			plaintext += res;
+		String plaintextBin = "";
+		for(int i = 0; i< plainText.length(); i++) {
+			plaintextBin += Functions.intToBinaryString(charToInt(plainText.charAt(i)));
 		}
 		
-		System.out.println("Plaintext:\t\t" + plaintext);
+		System.out.println("PlaintextBin:\t\t" + plaintextBin);
+		
+		boolean[] plaintextBits = Functions.StringToArray(plaintextBin);
+		
+		OFB ofb = new OFB(Solver.key, Solver.IV, Solver.shift);
+		boolean[] ciphertextBits = ofb.encode(plaintextBits);
+		
+		String ciphertextBin = Functions.ArrayToString(ciphertextBits);
+		
+		System.out.println("CiphertextBin:\t\t" + ciphertextBin);
+		
+		String ciphertext = "";
+		for(int i = 0; i < ciphertextBin.length(); i += 5) {
+			String bits = ciphertextBin.substring(i, i+5);
+			char a = Solver.intToChar(Functions.binaryStringToInt(bits));
+			ciphertext += a;
+		}
+		
+		System.out.println("Ciphertext:\t\t" + ciphertext);
 	}
-	
 	
 	/**
 	 * Converts the character to it's int representation for assignment 5.6

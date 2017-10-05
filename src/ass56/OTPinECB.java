@@ -1,5 +1,6 @@
 package ass56;
 
+import general.Functions;
 import general.OneTimePad;
 
 public class OTPinECB {
@@ -11,7 +12,7 @@ public class OTPinECB {
 	}
 	
 	public String encode(String i) {
-		return OneTimePad.ArrayToString(this.encode(OneTimePad.StringToArray(i)));
+		return Functions.ArrayToString(this.encode(Functions.StringToArray(i)));
 	}
 	
 	public boolean[] encode(boolean[] in) {
